@@ -1,0 +1,62 @@
+[
+    {
+        "nom": "fievre",
+        "mots_cles": ["fievre", "temperature", "chaud", "brulant", "38", "39", "40"],
+        "gravite": 2
+    },
+    {
+        "nom": "maux_de_tete",
+        "mots_cles": ["tete", "migraine", "cephale", "maux de tete"],
+        "gravite": 1
+    },
+    {
+        "nom": "diarrhee",
+        "mots_cles": ["diarrhee", "selle", "liquide", "ventre", "intestin"],
+        "gravite": 3
+    },
+    {
+        "nom": "vomissements",
+        "mots_cles": ["vomi", "vomit", "nausee", "envie de vomir"],
+        "gravite": 2
+    },
+    {
+        "nom": "douleurs_articulaires",
+        "mots_cles": ["articulation", "os", "douleur", "corps", "articulaire"],
+        "gravite": 1
+    },
+    {
+        "nom": "eruption_cutanee",
+        "mots_cles": ["eruption", "bouton", "rash", "peau", "tache"],
+        "gravite": 2
+    },
+    {
+        "nom": "frissons",
+        "mots_cles": ["frisson", "trembler", "froid", "grelot"],
+        "gravite": 1
+    },
+    {
+        "nom": "toux",
+        "mots_cles": ["toux", "tousse", "gorge", "respire", "poumon"],
+        "gravite": 1
+    },
+    {
+        "nom": "deshydratation",
+        "mots_cles": ["soif", "seche", "deshydrat", "urine", "bouche seche"],
+        "gravite": 3
+    },
+    {
+        "nom": "perte_conscience",
+        "mots_cles": ["inconscient", "evanoui", "tombe", "perdu conscience", "convuls"],
+        "gravite": 5
+    },
+    {
+        "nom": "difficulte_respiratoire",
+        "mots_cles": ["respire pas", "souffle", "essouffl", "difficulte respir"],
+        "gravite": 5
+    },
+    {
+        "nom": "douleurs_abdominales",
+        "mots_cles": ["ventre", "abdomen", "estomac", "crampe", "mal au ventre"],
+        "gravite": 2
+    }
+]

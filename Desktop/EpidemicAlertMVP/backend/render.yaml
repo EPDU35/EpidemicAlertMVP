@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: babi-alert-backend
+    env: node
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: MONGODB_URI
+        value: mongodb+srv://dbhark:dbhark2026@cluster0.szga2hm.mongodb.net/babi_alert?retryWrites=true&w=majority
+      - key: JWT_SECRET
+        value: babi_secret_key_2024
+      - key: PORT
+        value: 3000

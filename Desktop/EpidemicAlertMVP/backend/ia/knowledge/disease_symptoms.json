@@ -1,0 +1,9 @@
+{
+    "paludisme": ["fievre", "maux_de_tete", "frissons", "douleurs_articulaires"],
+    "cholera": ["diarrhee", "vomissements", "deshydratation", "douleurs_abdominales"],
+    "typhoide": ["fievre", "douleurs_abdominales", "maux_de_tete", "diarrhee"],
+    "dengue": ["fievre", "douleurs_articulaires", "eruption_cutanee", "maux_de_tete"],
+    "covid19": ["fievre", "toux", "difficulte_respiratoire", "maux_de_tete"],
+    "grippe": ["fievre", "toux", "maux_de_tete", "frissons"],
+    "rougeole": ["fievre", "eruption_cutanee", "toux", "maux_de_tete"]
+}

@@ -1,0 +1,34 @@
+{
+    "paludisme": {
+        "conseil": "Dormez sous moustiquaire impregnee d'insecticide. Eliminez les eaux stagnantes autour de votre habitation. Portez des vetements couvrants apres le coucher du soleil.",
+        "urgence": false
+    },
+    "cholera": {
+        "conseil": "Buvez uniquement de l'eau en bouteille ou bouillie. Lavez les mains avant chaque repas. Evitez les aliments vendus dans la rue non cuits.",
+        "urgence": true
+    },
+    "typhoide": {
+        "conseil": "Consommez de l'eau potable uniquement. Lavez soigneusement les fruits et legumes. Consultez un medecin pour un traitement antibiotique.",
+        "urgence": false
+    },
+    "dengue": {
+        "conseil": "Eliminez les eaux stagnantes (pots, pneus, bidons). Portez des repulsifs anti-moustiques. Couvrez-vous bras et jambes le matin et en soiree.",
+        "urgence": false
+    },
+    "covid19": {
+        "conseil": "Portez un masque en public. Lavez-vous les mains regulierement. Evitez les rassemblements en espace ferme.",
+        "urgence": false
+    },
+    "grippe": {
+        "conseil": "Reposez-vous et hydratez-vous. Prenez un antipyretique si fievre elevee. Evitez le contact avec les personnes vulnerables.",
+        "urgence": false
+    },
+    "rougeole": {
+        "conseil": "Isolez-vous pour eviter la contagion. Consultez un centre de sante rapidement. Veillez a la vaccination de votre entourage.",
+        "urgence": false
+    },
+    "general": {
+        "conseil": "Consultez un professionnel de sante si les symptomes persistent plus de 48h ou s'aggravent. Restez hydrate et reposez-vous.",
+        "urgence": false
+    }
+}

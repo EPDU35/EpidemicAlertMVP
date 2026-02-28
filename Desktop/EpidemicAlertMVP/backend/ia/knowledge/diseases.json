@@ -1,0 +1,72 @@
+[
+    {
+        "id": "paludisme",
+        "nom": "Paludisme",
+        "gravite": "elevee",
+        "urgence": false,
+        "description": "Maladie parasitaire transmise par les moustiques anopheles.",
+        "prevention": ["Dormir sous moustiquaire impregnee", "Eliminer les eaux stagnantes", "Porter des vetements couvrants le soir"],
+        "traitement": "Antipaludeens sur prescription medicale.",
+        "centre_recommande": true
+    },
+    {
+        "id": "cholera",
+        "nom": "Cholera",
+        "gravite": "tres_elevee",
+        "urgence": true,
+        "description": "Infection intestinale causee par Vibrio cholerae via l'eau ou aliments contamines.",
+        "prevention": ["Boire uniquement de l'eau potable", "Bien cuire les aliments", "Se laver les mains regulierement"],
+        "traitement": "Rehydratation urgente et antibiotiques.",
+        "centre_recommande": true
+    },
+    {
+        "id": "typhoide",
+        "nom": "Typhoide",
+        "gravite": "elevee",
+        "urgence": false,
+        "description": "Infection bacterienne causee par Salmonella typhi.",
+        "prevention": ["Boire de l'eau traitee", "Laver les fruits et legumes", "Hygiène des mains"],
+        "traitement": "Antibiotiques sur prescription.",
+        "centre_recommande": true
+    },
+    {
+        "id": "dengue",
+        "nom": "Dengue",
+        "gravite": "elevee",
+        "urgence": false,
+        "description": "Maladie virale transmise par le moustique Aedes aegypti.",
+        "prevention": ["Eliminer les gites larvaires", "Porter des repulsifs", "Moustiquaires"],
+        "traitement": "Traitement symptomatique, repos et hydratation.",
+        "centre_recommande": true
+    },
+    {
+        "id": "covid19",
+        "nom": "Covid-19",
+        "gravite": "variable",
+        "urgence": false,
+        "description": "Maladie respiratoire causee par le coronavirus SARS-CoV-2.",
+        "prevention": ["Porter un masque", "Se laver les mains", "Garder les distances"],
+        "traitement": "Traitement symptomatique selon gravite.",
+        "centre_recommande": true
+    },
+    {
+        "id": "grippe",
+        "nom": "Grippe",
+        "gravite": "moderee",
+        "urgence": false,
+        "description": "Infection virale respiratoire saisonniere.",
+        "prevention": ["Vaccination annuelle", "Lavage des mains", "Eviter les foules"],
+        "traitement": "Repos, hydratation, antipyretiques.",
+        "centre_recommande": false
+    },
+    {
+        "id": "rougeole",
+        "nom": "Rougeole",
+        "gravite": "elevee",
+        "urgence": false,
+        "description": "Maladie virale hautement contagieuse avec eruption cutanee.",
+        "prevention": ["Vaccination ROR", "Eviter contact avec malades"],
+        "traitement": "Traitement symptomatique, vitamine A.",
+        "centre_recommande": true
+    }
+]
