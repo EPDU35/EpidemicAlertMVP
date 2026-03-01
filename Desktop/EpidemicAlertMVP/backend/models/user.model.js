@@ -1,1 +1,23 @@
-const mongoose = require("mongoose"); const bcrypt = require("bcryptjs"); const schema = new mongoose.Schema({ name: { type: String, required: true, trim: true }, email: { type: String, required: true, unique: true, lowercase: true, trim: true }, password: { type: String, required: true }, role: { type: String, enum: ["citoyen","centre","autorite"], default: "citoyen" }, commune: { type: String, default: null }, telephone: { type: String, default: null }, actif: { type: Boolean, default: true } }, { timestamps: true }); schema.pre("save", async function(next) { if (!this.isModified("password")) return next(); this.password = await bcrypt.hash(this.password, 10); next(); }); schema.methods.verifierMotDePasse = async function(mdp) { return bcrypt.compare(mdp, this.password); }; schema.methods.toPublic = function() { return { _id: this._id, name: this.name, email: this.email, role: this.role, commune: this.commune, actif: this.actif }; }; module.exports = mongoose.model("User", schema);
+const db = require('../config/db');
+
+const User = {
+  findByEmail: async (email) => {
+    const [rows] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
+    return rows[0] || null;
+  },
+
+  findById: async (id) => {
+    const [rows] = await db.query('SELECT id, name, email, role, phone, location, created_at FROM users WHERE id = ?', [id]);
+    return rows[0] || null;
+  },
+
+  create: async ({ name, email, password, role, phone, location }) => {
+    const [result] = await db.query(
+      'INSERT INTO users (name, email, password, role, phone, location) VALUES (?, ?, ?, ?, ?, ?)',
+      [name, email, password, role, phone || null, location || null]
+    );
+    return result.insertId;
+  },
+};
+
+module.exports = User;

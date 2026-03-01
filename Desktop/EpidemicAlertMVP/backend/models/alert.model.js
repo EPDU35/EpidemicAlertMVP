@@ -1,34 +1,36 @@
-const mongoose = require('mongoose');
+const db = require('../config/db');
 
-const alertSchema = new mongoose.Schema({
-    disease: {
-        type: String,
-        required: true
-    },
-    commune: {
-        type: String,
-        default: null
-    },
-    level: {
-        type: String,
-        enum: ['faible', 'moyen', 'eleve'],
-        default: 'moyen'
-    },
-    description: {
-        type: String,
-        required: true
-    },
-    active: {
-        type: Boolean,
-        default: true
-    },
-    createdBy: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        default: null
-    }
-}, { timestamps: true });
+const Alert = {
+  create: async ({ title, message, level, location, disease, created_by }) => {
+    const [result] = await db.query(
+      `INSERT INTO alerts (title, message, level, location, disease, created_by)
+       VALUES (?, ?, ?, ?, ?, ?)`,
+      [title, message, level, location, disease || null, created_by]
+    );
+    return result.insertId;
+  },
 
-alertSchema.index({ active: 1, commune: 1 });
+  findAll: async ({ location, level } = {}) => {
+    let query = `SELECT a.*, u.name as author FROM alerts a JOIN users u ON a.created_by = u.id WHERE 1=1`;
+    const params = [];
+    if (location) { query += ' AND a.location LIKE ?'; params.push(`%${location}%`); }
+    if (level) { query += ' AND a.level = ?'; params.push(level); }
+    query += ' ORDER BY a.created_at DESC';
+    const [rows] = await db.query(query, params);
+    return rows;
+  },
 
-module.exports = mongoose.model('Alert', alertSchema);
+  findById: async (id) => {
+    const [rows] = await db.query(
+      'SELECT a.*, u.name as author FROM alerts a JOIN users u ON a.created_by = u.id WHERE a.id = ?',
+      [id]
+    );
+    return rows[0] || null;
+  },
+
+  delete: async (id) => {
+    await db.query('DELETE FROM alerts WHERE id = ?', [id]);
+  },
+};
+
+module.exports = Alert;

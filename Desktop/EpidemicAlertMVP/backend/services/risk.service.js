@@ -1,34 +1,29 @@
-const Case = require('../models/report.model');
-const Alert = require('../models/alert.model');
-const { calculerNiveauRisque } = require('../utils/thresholds');
+// calcul simple du niveau de risque basé sur le nb de cas confirmés dans une zone
+const Case = require('../models/case.model');
 
-async function evaluerRisqueCommune(commune) {
-    try {
-        const [totalCas, alertesActives] = await Promise.all([
-            Case.countDocuments({ commune }),
-            Alert.countDocuments({
-                commune: { $regex: new RegExp(commune, 'i') },
-                active: true
-            })
-        ]);
+const RISK_LEVELS = {
+  LOW: 'low',
+  MEDIUM: 'medium',
+  HIGH: 'high',
+  CRITICAL: 'critical',
+};
 
-        const niveau = calculerNiveauRisque(totalCas, alertesActives);
+const calculateRisk = async (location, days = 7) => {
+  const stats = await Case.countByStatusAndLocation(location, days);
 
-        if (totalCas >= 10 && alertesActives === 0) {
-            await Alert.create({
-                disease: 'Surveillance automatique',
-                commune: commune.charAt(0).toUpperCase() + commune.slice(1),
-                level: 'eleve',
-                description: `Seuil d'alerte atteint a ${commune}. ${totalCas} cas signales.`,
-                active: true,
-                createdBy: null
-            });
-        }
+  const confirmed = stats.find(s => s.status === 'confirmed')?.count || 0;
+  const pending = stats.find(s => s.status === 'pending')?.count || 0;
 
-        return { commune, niveau, totalCas, alertesActives };
-    } catch (err) {
-        console.error('Erreur evaluation risque :', err.message);
-    }
-}
+  // score pondéré : cas confirmés comptent double
+  const score = confirmed * 2 + pending;
 
-module.exports = { evaluerRisqueCommune };
+  let level;
+  if (score >= 20) level = RISK_LEVELS.CRITICAL;
+  else if (score >= 10) level = RISK_LEVELS.HIGH;
+  else if (score >= 4) level = RISK_LEVELS.MEDIUM;
+  else level = RISK_LEVELS.LOW;
+
+  return { level, score, confirmed, pending, location, days };
+};
+
+module.exports = { calculateRisk, RISK_LEVELS };

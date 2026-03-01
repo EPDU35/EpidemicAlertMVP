@@ -1,1 +1,20 @@
-const jwt = require("jsonwebtoken"); const User = require("../models/user.model"); const { JWT_SECRET } = require("../config/env"); module.exports = async function(req, res, next) { try { const header = req.headers.authorization; if (!header || !header.startsWith("Bearer ")) return res.status(401).json({ message: "Token manquant." }); const token = header.split(" ")[1]; const decoded = jwt.verify(token, JWT_SECRET); const user = await User.findById(decoded.id); if (!user || !user.actif) return res.status(401).json({ message: "Acces refuse." }); req.user = user; next(); } catch(err) { return res.status(401).json({ message: "Token invalide." }); } };
+const jwt = require('jsonwebtoken');
+const { JWT_SECRET } = require('../config/env');
+
+const authMiddleware = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).json({ error: 'Token manquant ou invalide' });
+  }
+
+  const token = authHeader.split(' ')[1];
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET);
+    req.user = decoded;
+    next();
+  } catch (err) {
+    return res.status(401).json({ error: 'Token expiré ou invalide' });
+  }
+};
+
+module.exports = authMiddleware;
